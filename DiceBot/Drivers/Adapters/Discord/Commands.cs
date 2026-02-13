@@ -1,3 +1,4 @@
+using DiceBot.Domain;
 using NetCord.Services.ApplicationCommands;
 using NetCord.Services.Commands;
 
@@ -10,7 +11,7 @@ public class Commands : CommandModule<CommandContext>
     {
         return expression;
     }
-    
+
     [Command("ping")]
     public string Ping() => $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
 }
@@ -18,11 +19,17 @@ public class Commands : CommandModule<CommandContext>
 public class SlashCommands : ApplicationCommandModule<ApplicationCommandContext>
 {
     [SlashCommand("roll", "roll a dice expression")]
-    public async Task<string> RollDice(string expression)
+    public string RollDice(
+        [SlashCommandParameter(Name = "expression", Description = "Roll expression e.g '2d6'")]
+        string expression,
+        
+        [SlashCommandParameter(Name = "modifier", Description = "Roll modifier like advantage etc..")]
+        DiceModifiers modifier = DiceModifiers.Normal
+    )
     {
-        return expression;
+        return $"{expression} {modifier.ToString()}";;
     }
-    
+
     [SlashCommand("ping", "pong")]
     public string Ping() => $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
 }
