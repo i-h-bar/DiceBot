@@ -1,6 +1,6 @@
 namespace DiceBot.Domain;
 
-public enum DiceModifiers
+public enum DiceModifier
 {
     Advantage,
     Disadvantage,

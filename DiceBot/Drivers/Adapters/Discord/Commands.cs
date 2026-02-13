@@ -24,7 +24,7 @@ public class SlashCommands : ApplicationCommandModule<ApplicationCommandContext>
         string expression,
         
         [SlashCommandParameter(Name = "modifier", Description = "Roll modifier like advantage etc..")]
-        DiceModifiers modifier = DiceModifiers.Normal
+        DiceModifier modifier = DiceModifier.Normal
     )
     {
         return $"{expression} {modifier.ToString()}";;
