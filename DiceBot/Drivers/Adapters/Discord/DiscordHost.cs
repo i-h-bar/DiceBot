@@ -3,11 +3,12 @@ using Microsoft.Extensions.Hosting;
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services;
+using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.Commands;
 
 namespace DiceBot.Drivers.Adapters.Discord;
 
-public class DiscordHost : IBotHost
+internal class DiscordHost : IBotHost
 {
     private IHost? Host { get; set; }
     
@@ -23,7 +24,8 @@ public class DiscordHost : IBotHost
                                       GatewayIntents.MessageContent;
                 }
             )
-            .AddCommands();
+            .AddCommands()
+            .AddApplicationCommands();
 
         Host = builder.Build();
         
