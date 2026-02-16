@@ -2,15 +2,44 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceBot", "DiceBot\DiceBot.csproj", "{66015F92-D58A-4E2A-938C-16526F36C487}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceBot.Tests", "DiceBot.Tests\DiceBot.Tests.csproj", "{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|x64.Build.0 = Debug|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Debug|x86.Build.0 = Debug|Any CPU
 		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|x64.ActiveCfg = Release|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|x64.Build.0 = Release|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|x86.ActiveCfg = Release|Any CPU
+		{66015F92-D58A-4E2A-938C-16526F36C487}.Release|x86.Build.0 = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|x64.Build.0 = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Debug|x86.Build.0 = Debug|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|x64.ActiveCfg = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|x64.Build.0 = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|x86.ActiveCfg = Release|Any CPU
+		{3DF5F47E-1EAC-4DFE-ACD9-C5CA2AE84CAA}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
