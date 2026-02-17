@@ -24,4 +24,8 @@
     <ProjectReference Include="..\DiceBot\DiceBot.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Dice\" />
+  </ItemGroup>
+
 </Project>
