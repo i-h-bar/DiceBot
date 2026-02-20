@@ -9,18 +9,36 @@ public class DiceTests
     public void TestDiceString()
     {
         var dice = new StandardDice(6, 2);
-        
+
         Assert.That(dice.ToString(), Is.EqualTo("2d6"));
     }
-    
+
     [Test]
     public void TestSingleDiceString()
     {
         var dice = new StandardDice(6, 1);
-        
+
         Assert.That(dice.ToString(), Is.EqualTo("d6"));
     }
     
+    [Test]
+    public void TestResultRepr()
+    {
+        var dice = new StandardDice(6, 1);
+        var result = dice.Roll();
+        
+        Assert.That(result.Repr, Is.EqualTo($"(d6) {result.Result}"));
+    }
+    
+    [Test]
+    public void TestTwoDiceResultRepr()
+    {
+        var dice = new StandardDice(6, 2);
+        var result = dice.Roll();
+        
+        Assert.That(result.Repr, Is.EqualTo($"(2d6) {result.Result}"));
+    }
+
     [Test]
     public void TestRoll()
     {
@@ -33,7 +51,7 @@ public class DiceTests
             Assert.That(result.Result, Is.GreaterThan(0));
         }
     }
-    
+
     [Test]
     public void TestSingleRoll()
     {

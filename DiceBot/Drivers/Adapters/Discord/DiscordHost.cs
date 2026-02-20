@@ -11,7 +11,7 @@ namespace DiceBot.Drivers.Adapters.Discord;
 internal class DiscordHost : IBotHost
 {
     private IHost? Host { get; set; }
-    
+
     public async Task Init(string[] args)
     {
         var builder = Microsoft.Extensions.Hosting.Host.CreateApplicationBuilder(args);
@@ -19,7 +19,7 @@ internal class DiscordHost : IBotHost
         builder.Services
             .AddDiscordGateway(options =>
                 {
-                    options.Intents = GatewayIntents.GuildMessages | 
+                    options.Intents = GatewayIntents.GuildMessages |
                                       GatewayIntents.DirectMessages |
                                       GatewayIntents.MessageContent;
                 }
@@ -28,15 +28,12 @@ internal class DiscordHost : IBotHost
             .AddApplicationCommands();
 
         Host = builder.Build();
-        
+
         Host.AddModules(typeof(Program).Assembly);
     }
 
     public async Task RunAsync()
     {
-        if (Host is not null)
-        {
-            await Host.RunAsync();
-        }
+        if (Host is not null) await Host.RunAsync();
     }
 }

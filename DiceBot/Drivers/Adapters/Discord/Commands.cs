@@ -13,7 +13,10 @@ public class Commands : CommandModule<CommandContext>
     }
 
     [Command("ping")]
-    public string Ping() => $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
+    public string Ping()
+    {
+        return $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
+    }
 }
 
 public class SlashCommands : ApplicationCommandModule<ApplicationCommandContext>
@@ -22,14 +25,17 @@ public class SlashCommands : ApplicationCommandModule<ApplicationCommandContext>
     public string RollDice(
         [SlashCommandParameter(Name = "expression", Description = "Roll expression e.g '2d6'")]
         string expression,
-        
         [SlashCommandParameter(Name = "modifier", Description = "Roll modifier like advantage etc..")]
         DiceModifier modifier = DiceModifier.Normal
     )
     {
-        return $"{expression} {modifier.ToString()}";;
+        return $"{expression} {modifier.ToString()}";
+        ;
     }
 
     [SlashCommand("ping", "pong")]
-    public string Ping() => $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
+    public string Ping()
+    {
+        return $"Pong! {Math.Round(Context.Client.Latency.TotalMilliseconds)} ms";
+    }
 }

@@ -4,5 +4,5 @@ public enum DiceModifier
 {
     Advantage,
     Disadvantage,
-    Normal,
+    Normal
 }

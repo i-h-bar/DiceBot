@@ -1,5 +1,5 @@
-using DiceBot.Drivers.Ports;
 using DiceBot.Drivers.Adapters.Discord;
+using DiceBot.Drivers.Ports;
 
 namespace DiceBot.Drivers.Adapters;
 

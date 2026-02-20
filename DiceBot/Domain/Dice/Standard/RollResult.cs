@@ -1,9 +1,12 @@
 namespace DiceBot.Domain.Dice.Standard;
 
-
-internal class Operation                                                                                                                                                                                                                                                                                         
+internal class Operation
 {
-    private readonly Func<int, int, int> _func;                                                                                                                                                                                                                                                                  
+    public static readonly Operation Add = new((x, y) => x + y, "+");
+    public static readonly Operation Sub = new((x, y) => x - y, "-");
+    public static readonly Operation Mul = new((x, y) => x * y, "*");
+    public static readonly Operation Div = new((x, y) => x / y, "/");
+    private readonly Func<int, int, int> _func;
     private readonly string _repr;
 
     private Operation(Func<int, int, int> func, string repr)
@@ -12,82 +15,66 @@ internal class Operation
         _repr = repr;
     }
 
-    public int Invoke(int x, int y) => _func(x, y);
-    public override string ToString() => _repr;
+    public int Invoke(int x, int y)
+    {
+        return _func(x, y);
+    }
 
-    public static readonly Operation Add = new((x, y) => x + y, "+");
-    public static readonly Operation Sub = new((x, y) => x - y, "-");
-    public static readonly Operation Mul = new((x, y) => x * y, "*");
-    public static readonly Operation Div = new((x, y) => x / y, "/");
+    public override string ToString()
+    {
+        return _repr;
+    }
 }
 
-
-public class RollResult
+public class RollResult : IResult<RollResult>
 {
+    public readonly string? Repr;
+    public readonly int Result;
+
     public RollResult(string? repr, int result)
     {
         Repr = repr;
         Result = result;
     }
-    
-    public readonly string? Repr;
-    public readonly int Result;
+
+    public string FormatResult()
+    {
+        return $"{Repr} = {Result}";
+    }
     
     public override string ToString()
     {
-        return Repr is not null ? $"({Repr}) {Result}" : Result.ToString();
+        return Repr ?? Result.ToString();
     }
 
-    public static ResultCollection operator +(RollResult a, RollResult b) => CalculateResult(a, b, Operation.Add);
-    public static ResultCollection operator +(RollResult a, ResultCollection b) => CalculateResult(a, b, Operation.Add);
-    public static ResultCollection operator +(ResultCollection a, RollResult b) => CalculateResult(b, a, Operation.Add);
-    public static ResultCollection operator -(RollResult a, RollResult b) => CalculateResult(a, b, Operation.Sub);
-    public static ResultCollection operator -(RollResult a, ResultCollection b) => CalculateResult(a, b, Operation.Sub);
-    public static ResultCollection operator -(ResultCollection a, RollResult b) => CalculateResult(b, a, Operation.Sub);
-    public static ResultCollection operator *(RollResult a, RollResult b) => CalculateResult(a, b, Operation.Mul);
-    public static ResultCollection operator *(RollResult a, ResultCollection b) => CalculateResult(a, b, Operation.Mul);
-    public static ResultCollection operator *(ResultCollection a, RollResult b) => CalculateResult(b, a, Operation.Mul);
-    public static ResultCollection operator /(RollResult a, RollResult b) => CalculateResult(a, b, Operation.Div);
-    public static ResultCollection operator /(RollResult a, ResultCollection b) => CalculateResult(a, b, Operation.Div);
-    public static ResultCollection operator /(ResultCollection a, RollResult b) => CalculateResult(b, a, Operation.Div);
-    
-    private static ResultCollection CalculateResult(RollResult a, RollResult b, Operation operation)
+    public static RollResult operator +(RollResult a, RollResult b)
     {
-        return new ResultCollection(expression: $"{a} {operation} {b}", total: operation.Invoke(a.Result, b.Result));
+        return CalculateResult(a, b, Operation.Add);
     }
     
-    private static ResultCollection CalculateResult(RollResult a, ResultCollection b, Operation operation)
+    public static RollResult operator -(RollResult a, RollResult b)
     {
-        return new ResultCollection($"{b.Expression} {operation} {a}", operation.Invoke(b.Total, a.Result));
+        return CalculateResult(a, b, Operation.Sub);
     }
 
-
-}
-
-
-public class ResultCollection
-{
-    public ResultCollection(string expression, int total)
+    public static RollResult operator *(RollResult a, RollResult b)
     {
-        Expression = expression;
-        Total = total;
+        return CalculateResult(a, b, Operation.Mul);
     }
     
-    public readonly string Expression;
-    public readonly int Total;
-    
-    public override string ToString()
+    public static RollResult operator /(RollResult a, RollResult b)
     {
-        return $"{Expression} = {Total}";
+        return CalculateResult(a, b, Operation.Div);
     }
-    
-    public static ResultCollection operator +(ResultCollection a, ResultCollection b) => CalculateResult(a, b, Operation.Add);
-    public static ResultCollection operator -(ResultCollection a, ResultCollection b) => CalculateResult(a, b, Operation.Sub);
-    public static ResultCollection operator *(ResultCollection a, ResultCollection b) => CalculateResult(a, b, Operation.Mul);
-    public static ResultCollection operator /(ResultCollection a, ResultCollection b) => CalculateResult(a, b, Operation.Div);
-    
-    private static ResultCollection CalculateResult(ResultCollection a, ResultCollection b, Operation operation)
+
+    private static RollResult CalculateResult(RollResult a, RollResult b, Operation operation)
     {
-        return new ResultCollection($"({a.Expression}) {operation} ({b.Expression})", operation.Invoke(a.Total, b.Total));
+        var repr = operation switch
+        {
+            _ when operation == Operation.Mul || operation == Operation.Div => $"({a.Repr}) {operation} {b}",
+            _ => $"{a} {operation} {b}",
+        };
+        
+        return new RollResult(repr, operation.Invoke(a.Result, b.Result));
     }
 }
